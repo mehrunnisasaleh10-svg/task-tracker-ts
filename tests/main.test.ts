@@ -1,4 +1,3 @@
-
 /**
  * Browser integration tests for the Typed Task Tracker.
  * @vitest-environment jsdom
@@ -20,16 +19,12 @@ describe("Typed Task Tracker browser app", () => {
   it("renders the dashboard and initial sample tasks", async () => {
     await import("../src/main");
 
-    expect(document.querySelector("h1")?.textContent).toContain(
-      "Typed Task Tracker",
-    );
+    expect(document.querySelector("h1")?.textContent).toContain("Typed Task Tracker");
     expect(document.querySelector("#stats")?.textContent).toContain("Total tasks");
     expect(document.querySelector("#task-list")?.textContent).toContain(
       "Review project requirements",
     );
-    expect(document.querySelector("#task-list")?.textContent).toContain(
-      "Write unit tests",
-    );
+    expect(document.querySelector("#task-list")?.textContent).toContain("Write unit tests");
   });
 
   it("shows a validation message for a blank task title", async () => {
@@ -39,21 +34,15 @@ describe("Typed Task Tracker browser app", () => {
     const title = document.querySelector<HTMLInputElement>("#task-title")!;
     title.value = "   ";
 
-    form.dispatchEvent(
-      new Event("submit", { bubbles: true, cancelable: true }),
-    );
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
 
-    expect(document.querySelector("#notice")?.textContent).toContain(
-      "Please enter a title",
-    );
+    expect(document.querySelector("#notice")?.textContent).toContain("Please enter a title");
   });
 
   it("filters tasks by priority and completion status", async () => {
     await import("../src/main");
 
-    const priority = document.querySelector<HTMLSelectElement>(
-      "#filter-priority",
-    )!;
+    const priority = document.querySelector<HTMLSelectElement>("#filter-priority")!;
     priority.value = "high";
     priority.dispatchEvent(new Event("change", { bubbles: true }));
 
@@ -61,15 +50,11 @@ describe("Typed Task Tracker browser app", () => {
       "Review project requirements",
     );
 
-    const status = document.querySelector<HTMLSelectElement>(
-      "#filter-status",
-    )!;
+    const status = document.querySelector<HTMLSelectElement>("#filter-status")!;
     status.value = "done";
     status.dispatchEvent(new Event("change", { bubbles: true }));
 
-    expect(document.querySelector("#result-count")?.textContent).toContain(
-      "0 of 3 tasks",
-    );
+    expect(document.querySelector("#result-count")?.textContent).toContain("0 of 3 tasks");
   });
 
   it("changes the task sorting option", async () => {
@@ -93,12 +78,8 @@ describe("Typed Task Tracker browser app", () => {
 
     await vi.advanceTimersByTimeAsync(200);
 
-    expect(document.querySelector("#task-list")?.textContent).toContain(
-      "Write unit tests",
-    );
-    expect(document.querySelector("#result-count")?.textContent).toContain(
-      "1 of 3 tasks",
-    );
+    expect(document.querySelector("#task-list")?.textContent).toContain("Write unit tests");
+    expect(document.querySelector("#result-count")?.textContent).toContain("1 of 3 tasks");
   });
 
   it("adds a task through the form", async () => {
@@ -110,9 +91,7 @@ describe("Typed Task Tracker browser app", () => {
     tags.value = "internship, report";
 
     const form = document.querySelector<HTMLFormElement>("#task-form")!;
-    form.dispatchEvent(
-      new Event("submit", { bubbles: true, cancelable: true }),
-    );
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
 
     await vi.waitFor(() => {
       expect(document.querySelector("#task-list")?.textContent).toContain(
@@ -124,8 +103,6 @@ describe("Typed Task Tracker browser app", () => {
   it("handles an unknown app container without crashing the test", async () => {
     document.body.innerHTML = "";
 
-    await expect(import("../src/main")).rejects.toThrow(
-      'App element "#app" was not found.',
-    );
+    await expect(import("../src/main")).rejects.toThrow('App element "#app" was not found.');
   });
 });

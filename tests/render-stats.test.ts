@@ -7,7 +7,9 @@ describe("safe rendering", () => {
   it("renders each async state distinctly", () => {
     expect(renderTasks({ status: "loading" })).toContain("Loading tasks");
     expect(renderTasks({ status: "empty" })).toContain("No tasks yet");
-    expect(renderTasks({ status: "error", message: "offline" })).toContain("Please check your connection and try again.");
+    expect(renderTasks({ status: "error", message: "offline" })).toContain(
+      "Please check your connection and try again.",
+    );
     expect(renderTasks({ status: "success", data: [task("one")] })).toContain("priority-medium");
   });
   it("escapes script-like user input", () => {
@@ -46,4 +48,3 @@ describe("statistics", () => {
     });
   });
 });
-
