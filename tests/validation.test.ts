@@ -1,4 +1,3 @@
-
 import { describe, expect, it } from "vitest";
 import { parseTask, parseTaskList } from "../src/validation";
 
@@ -65,4 +64,3 @@ describe("parseTaskList", () => {
     expect(result.rejected).toHaveLength(1);
   });
 });
-

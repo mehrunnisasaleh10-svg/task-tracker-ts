@@ -44,8 +44,7 @@ export function parseTask(raw: unknown): ParseTaskResult {
   const priority = raw.priority;
   const tags = raw.tags;
   const createdAt = parseDate(raw.createdAt);
-  const completedAt =
-    raw.completedAt === null ? null : parseDate(raw.completedAt);
+  const completedAt = raw.completedAt === null ? null : parseDate(raw.completedAt);
 
   if (typeof id !== "string" || id.trim() === "") {
     errors.push("id must be a non-empty string.");
@@ -59,17 +58,11 @@ export function parseTask(raw: unknown): ParseTaskResult {
     errors.push("description must be a string.");
   }
 
-  if (
-    typeof priority !== "string" ||
-    !priorities.includes(priority as TaskPriority)
-  ) {
+  if (typeof priority !== "string" || !priorities.includes(priority as TaskPriority)) {
     errors.push("priority must be low, medium, or high.");
   }
 
-  if (
-    !Array.isArray(tags) ||
-    !tags.every((tag: unknown) => typeof tag === "string")
-  ) {
+  if (!Array.isArray(tags) || !tags.every((tag: unknown) => typeof tag === "string")) {
     errors.push("tags must be an array of strings.");
   }
 

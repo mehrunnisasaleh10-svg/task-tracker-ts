@@ -22,10 +22,7 @@ export function assertNever(value: never): never {
   throw new Error(`Unexpected value: ${String(value)}`);
 }
 
-export function mapAsyncState<T, U>(
-  state: AsyncState<T>,
-  mapData: (data: T) => U,
-): AsyncState<U> {
+export function mapAsyncState<T, U>(state: AsyncState<T>, mapData: (data: T) => U): AsyncState<U> {
   switch (state.status) {
     case "idle":
       return { status: "idle" };
