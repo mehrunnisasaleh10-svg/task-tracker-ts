@@ -54,18 +54,12 @@ describe("parseTask", () => {
   it("rejects a missing title", () => {
     const task = { ...validTask };
     delete (task as Partial<typeof validTask>).title;
-    expect(() => parseTask(task)).toThrow(
-      "Task title must be a non-empty string",
-    );
+    expect(() => parseTask(task)).toThrow("Task title must be a non-empty string");
   });
 
   it("rejects a missing completed value", () => {
     const task = { ...validTask };
     delete (task as Partial<typeof validTask>).completed;
-    expect(() => parseTask(task)).toThrow(
-      "Task completed must be a boolean",
-    );
+    expect(() => parseTask(task)).toThrow("Task completed must be a boolean");
   });
 });
-
-

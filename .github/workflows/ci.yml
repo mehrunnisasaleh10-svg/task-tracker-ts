@@ -11,7 +11,6 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,3 +25,9 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
